@@ -1,20 +1,38 @@
 package com.danlu.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import com.danlu.service.DemoService;
+
 
 @Controller
+@RequestMapping("/danlu")
 public class DemoController {
 
-	@RequestMapping("/danlu")
-	public String helloWorld(Model model) {
-		System.out.println("hahahhaha !success");
-		String word0 = "Hello ";
-		String word1 = "World!";
-		//将数据添加到视图数据容器中
-		model.addAttribute("word0",word0);
-		model.addAttribute("word1",word1);
-		return "index";
+	@Autowired 
+	private DemoService demoService;
+	
+	@RequestMapping("/login")
+	public String login(){
+		return "login";
+	}
+	@RequestMapping("/success")
+	public ModelAndView helloWorld(HttpServletRequest request) {
+		ModelAndView mav;
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		boolean flag = demoService.checkLogin(username, password);
+		if(flag)
+		{
+		   mav = new ModelAndView("index");
+		   mav.addObject("username", username);
+		}
+		else {
+			mav = new ModelAndView("fail");
+		}
+		return mav;
 	}
 }
