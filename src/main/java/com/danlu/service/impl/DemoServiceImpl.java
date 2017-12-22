@@ -1,5 +1,6 @@
 package com.danlu.service.impl;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,5 @@ public class DemoServiceImpl implements DemoService{
 	{
 		return demoManager.checkLogin(username, password);
 	}
-	public void test(){
-		System.out.println("i am test");
-	}
+
 }
