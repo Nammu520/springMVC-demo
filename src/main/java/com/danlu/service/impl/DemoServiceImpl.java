@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danlu.core.DemoManager;
+import com.danlu.persist.entity.User;
 import com.danlu.service.DemoService;
+
 
 @Service
 public class DemoServiceImpl implements DemoService{
@@ -17,4 +19,7 @@ public class DemoServiceImpl implements DemoService{
 		return demoManager.checkLogin(username, password);
 	}
 
+	public User selectByPrimaryKey(int id){
+	    return demoManager.selectByPrimaryKey(id);
+	}
 }
